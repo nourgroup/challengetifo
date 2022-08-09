@@ -4,23 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@+id/search">
+    app:startDestination="@+id/searchFragment">
     <fragment
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:label="search"
         android:name="fr.tifo.challengetifo.ui.SearchFragment"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_search_to_branch"
-            app:destination="@+id/branch" />
+            app:destination="@+id/branchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/branch"
+        android:id="@+id/branchFragment"
         android:name="fr.tifo.challengetifo.ui.BranchFragment"
         android:label="branch"
         tools:layout="@layout/fragment_branch" >
-        <action
-            android:id="@+id/action_branch_contributor"
-            app:destination="@+id/branch" />
+        <argument android:name="contributor"
+            app:argType="string"
+            android:defaultValue="null"/>
     </fragment>
 </navigation>

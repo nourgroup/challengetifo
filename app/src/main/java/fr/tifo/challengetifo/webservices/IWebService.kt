@@ -1,4 +1,4 @@
-package ft.exomind.testexomind.webservices
+package fr.tifo.challengetifo.webservices
 
 
 import fr.tifo.challengetifo.data.Data

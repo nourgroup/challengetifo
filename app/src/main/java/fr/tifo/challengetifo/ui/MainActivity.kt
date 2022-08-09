@@ -6,7 +6,6 @@ import fr.tifo.challengetifo.R
 import fr.tifo.challengetifo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     lateinit var _binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
