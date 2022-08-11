@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -37,37 +38,44 @@ class SearchFragment : Fragment() {
 
         val viewModel : ViewModelGithub by viewModels()
 
-        _binding.etSearchProject.addTextChangedListener {
+        viewModel.initRoomDatabase(context)
+        /*_binding.etSearchProject.addTextChangedListener {
             try{
                 if(it!!.length>lengthText){
                     _binding.swipeRefresh.isRefreshing = true
-                    Toast.makeText(activity, "$it", Toast.LENGTH_SHORT).show()
                     viewModel.getData(it.toString())
                 }
                 lengthText=it!!.length
             }catch (Ex : Exception){
 
             }
-        }
+        }*/
+        _binding.etSearchProject.setOnEditorActionListener { _, actionId, _ ->
+            _binding.swipeRefresh.isRefreshing = true
+            viewModel.getData(_binding.etSearchProject.text.toString())
+                //if (actionId == EditorInfo.IME_ACTION_DONE) { }
+                true
+            }
 
-        //octokit+language:csharp
         _binding.rvListProjects.apply{
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
         }
 
-        viewModel.result.observe(viewLifecycleOwner){
-            Toast.makeText(activity, "Loading ...", Toast.LENGTH_SHORT).show()
+        viewModel.resultProject.observe(viewLifecycleOwner){
             _binding.rvListProjects.apply{
-                adapter = ProjectAdapter(it){
-                    try{
-                        var action = SearchFragmentDirections.actionSearchToBranch()
-                        action.contributor = it
-                        findNavController().navigate(action)
-                    }catch(ex : IllegalArgumentException){
-                        Toast.makeText(activity, "probleme servenu", Toast.LENGTH_SHORT).show()
-                        Log.i("findNavController", ex.toString())
+                if(it!=null){
+                    Toast.makeText(activity, "Loading ...", Toast.LENGTH_SHORT).show()
+                    adapter = ProjectAdapter(it){
+                        try{
+                            var action = SearchFragmentDirections.actionSearchToBranch()
+                            action.contributor = it
+                            findNavController().navigate(action)
+                        }catch(ex : IllegalArgumentException){
+                            Toast.makeText(activity, "something went wrong", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                    adapter?.notifyDataSetChanged()
                 }
             }
             _binding.swipeRefresh.isRefreshing = false

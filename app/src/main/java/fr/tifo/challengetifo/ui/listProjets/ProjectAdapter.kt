@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.tifo.challengetifo.R
-import fr.tifo.challengetifo.data.Data
-import fr.tifo.challengetifo.databinding.ItemProjectBinding
+import fr.tifo.challengetifo.data.Project.Data
+import fr.tifo.challengetifo.data.Project.Project
 
 class ProjectAdapter (
-    private val mListProjects: Data,
+    private val mListProjects: List<Project>,
     private val listener : (String) -> Unit
     ) : RecyclerView.Adapter<ProjectAdapter.ViewHolder>() {
 
@@ -27,7 +27,7 @@ class ProjectAdapter (
 
         // binds the list items to a view
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val itemsViewModel = mListProjects.items.get(position)
+            val itemsViewModel = mListProjects.get(position)
             // sets the text to the textview from our itemHolder class
             holder.projectName.text = itemsViewModel.full_name
             holder.description.text = itemsViewModel.description
@@ -42,14 +42,14 @@ class ProjectAdapter (
 
         // return the number of the items in the list
         override fun getItemCount(): Int {
-            return mListProjects.items.size
+            return mListProjects.size
         }
 
         // Holds the views for adding it to image and text
         class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-            val projectName: TextView = itemView.findViewById(R.id.project_name)
-            val description: TextView = itemView.findViewById(R.id.description)
-            val language: TextView = itemView.findViewById(R.id.language)
-            val nbr: TextView = itemView.findViewById(R.id.nbr)
+            val projectName: TextView = itemView.findViewById(R.id.tv_project_name)
+            val description: TextView = itemView.findViewById(R.id.tv_description)
+            val language: TextView = itemView.findViewById(R.id.tv_language)
+            val nbr: TextView = itemView.findViewById(R.id.tv_nbr)
         }
     }

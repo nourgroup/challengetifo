@@ -14,7 +14,11 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_search_project"/>
+            android:id="@+id/et_search_project"
+            android:hint="@string/search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_projects"
