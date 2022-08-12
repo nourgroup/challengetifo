@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "contributor_table")
 data class Contributor(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     val login: String,
     val avatar_url: String
 )

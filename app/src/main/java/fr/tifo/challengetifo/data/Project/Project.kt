@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "project_table")
 data class Project(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     val full_name: String,
     val stargazers_count: Int,
     val description: String,

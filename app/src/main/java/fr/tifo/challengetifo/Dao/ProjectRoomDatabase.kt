@@ -9,24 +9,21 @@ import fr.tifo.challengetifo.data.Contributor.Contributor
 import fr.tifo.challengetifo.data.Project.Project
 
 @Database(
-    entities = [
-        //Project::class,
-        Branch::class,
-        Contributor::class],
+    entities = [Project::class, Branch::class,Contributor::class],
     version = 1,
     exportSchema = false
 )
 abstract class ProjectRoomDatabase: RoomDatabase(){
-    //abstract fun projectDao() : ProjectDao
-    abstract fun branchDaoDao() : BranchDao
-    abstract fun contributorDao() : ContributorDao
+    abstract fun projectDao() : ProjectDao
 
     companion object {
         @Volatile
         private var INSTANCE: ProjectRoomDatabase? = null
 
-        //singleton
-        fun getDatabase(context: Context?): ProjectRoomDatabase{
+        // design p singleton
+        fun getDatabase(
+            context: Context?
+        ): ProjectRoomDatabase{
             val tempInstance = INSTANCE
             if(tempInstance != null){
                 return tempInstance

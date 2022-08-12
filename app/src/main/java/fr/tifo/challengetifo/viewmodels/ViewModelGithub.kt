@@ -1,6 +1,8 @@
 package fr.tifo.challengetifo.viewmodels
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,16 +28,14 @@ class ViewModelGithub : ViewModel() {
 
 
     fun initRoomDatabase(context: Context?){
-        //var mProjectRoomDatabase =ProjectRoomDatabase.getDatabase(context = context).projectDao()
-        mRepositoryGitHub = RepositoryGitHub(WebServiceGitHub())
-        //,mProjectRoomDatabase
+        var mProjectRoomDatabase =ProjectRoomDatabase.getDatabase(context = context).projectDao()
+        mRepositoryGitHub = RepositoryGitHub(WebServiceGitHub(),mProjectRoomDatabase)
     }
 
 
     fun getData(keyword : String){
         viewModelScope.launch(Dispatchers.IO) {
-            mRepositoryGitHub.getData(keyword)
-            mRepositoryGitHub.responnseProjects.collect{
+            mRepositoryGitHub.getData(keyword).collect{
                 resultProject.postValue(it)
             }
         }

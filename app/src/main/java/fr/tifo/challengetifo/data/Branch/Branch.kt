@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "branch_table")
 data class Branch(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     val name: String
 )

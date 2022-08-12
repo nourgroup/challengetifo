@@ -53,7 +53,6 @@ class SearchFragment : Fragment() {
         _binding.etSearchProject.setOnEditorActionListener { _, actionId, _ ->
             _binding.swipeRefresh.isRefreshing = true
             viewModel.getData(_binding.etSearchProject.text.toString())
-                //if (actionId == EditorInfo.IME_ACTION_DONE) { }
                 true
             }
 
@@ -62,22 +61,21 @@ class SearchFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        viewModel.resultProject.observe(viewLifecycleOwner){
-            _binding.rvListProjects.apply{
-                if(it!=null){
-                    Toast.makeText(activity, "Loading ...", Toast.LENGTH_SHORT).show()
-                    adapter = ProjectAdapter(it){
+
+        viewModel.resultProject.observe(viewLifecycleOwner){ pr ->
+                if(pr!=null){
+                    var adapter = ProjectAdapter(pr){ choice ->
                         try{
                             var action = SearchFragmentDirections.actionSearchToBranch()
-                            action.contributor = it
+                            action.contributor = choice
                             findNavController().navigate(action)
                         }catch(ex : IllegalArgumentException){
                             Toast.makeText(activity, "something went wrong", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    adapter?.notifyDataSetChanged()
+                    _binding.rvListProjects.adapter = adapter
+                    //adapter?.notifyDataSetChanged()
                 }
-            }
             _binding.swipeRefresh.isRefreshing = false
         }
 
