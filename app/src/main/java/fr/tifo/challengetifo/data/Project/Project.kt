@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Project(
     @PrimaryKey
     val full_name: String,
-    val stargazers_count: Int,
-    val description: String,
-    val language: String
+    val stargazers_count: Int?,
+    val description: String?,
+    val language: String?
 )

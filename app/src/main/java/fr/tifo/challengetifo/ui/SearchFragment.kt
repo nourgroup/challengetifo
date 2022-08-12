@@ -74,7 +74,7 @@ class SearchFragment : Fragment() {
                         }
                     }
                     _binding.rvListProjects.adapter = adapter
-                    //adapter?.notifyDataSetChanged()
+                    adapter?.notifyDataSetChanged()
                 }
             _binding.swipeRefresh.isRefreshing = false
         }

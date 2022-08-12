@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Contributor(
     @PrimaryKey
     val login: String,
-    val avatar_url: String
+    val avatar_url: String?
 )
