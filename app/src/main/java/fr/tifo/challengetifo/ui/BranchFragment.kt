@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ConcatAdapter
@@ -47,8 +48,12 @@ class BranchFragment : Fragment() {
         viewModelGithub.getContributor(data.contributor)
 
         viewModelGithub.resultbranches.observe(viewLifecycleOwner){ br ->
-            viewModelGithub.resultContributors.observe(viewLifecycleOwner){ co ->
-                _binding.rvListBranches.adapter = ConcatAdapter(BranchAdapter(br),ContributorAdapter(co))
+            if(br!=null){
+                viewModelGithub.resultContributors.observe(viewLifecycleOwner){ co ->
+                    if(co!=null){
+                        _binding.rvListBranches.adapter = ConcatAdapter(BranchAdapter(br),ContributorAdapter(co))
+                    }
+                }
             }
         }
     }
