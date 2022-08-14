@@ -3,6 +3,7 @@ package fr.tifo.challengetifo.ui.listProjets
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.tifo.challengetifo.R
@@ -34,7 +35,7 @@ class ProjectAdapter (
             holder.language.text = itemsViewModel.language
             holder.nbr.text = itemsViewModel.stargazers_count.toString()
 
-            holder.projectName.setOnClickListener {
+            holder.item.setOnClickListener {
                 listener(itemsViewModel.full_name)
             }
 
@@ -51,5 +52,6 @@ class ProjectAdapter (
             val description: TextView = itemView.findViewById(R.id.tv_description)
             val language: TextView = itemView.findViewById(R.id.tv_language)
             val nbr: TextView = itemView.findViewById(R.id.tv_nbr)
+            val item: LinearLayout = itemView.findViewById(R.id.ll_item)
         }
     }

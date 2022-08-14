@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @Dao
 interface ProjectDao {
 
-    @Query("Select * from project_table WHERE full_name like '%' || :keyword || '%'")
+    @Query("Select * from project_table WHERE full_name like '%/' || :keyword || '%'")
     fun getProjects(keyword :String) : Flow<List<Project>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
